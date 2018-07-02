@@ -1,0 +1,110 @@
+* {
+    margin:0;
+    padding:0;
+}
+div {
+    box-sizing: border-box;
+}
+.resume {
+    width:1440px;
+    margin:0 auto;
+}
+/* 头部  header*/
+.head {
+    height:200px;
+    float:left;
+    background-color:#1a4b9b;
+}
+.head-left {
+    width:20%;
+}
+.head-mid-name {
+    width:60%;
+    text-align:center;
+    line-height:100px;
+    color:#fff;
+    font-size:20px;
+}
+.head-right {
+    width:20%;
+}
+.head-right img {
+    height:150px;
+    margin-top:20px;
+}
+/* 中部  main*/
+/* 中部左边  main-left*/
+.info-h {
+    color:#1a4b9b;
+    margin-left:50px;
+    margin-top:20px;
+    margin-bottom:20px;
+    font-size:38px;
+}
+.info-p {
+    color:#1a4b9b;
+    margin-left:50px;
+    font-size:24px;
+    line-height:38px;
+}
+.main-left {
+    width:30%;
+    height:1000px;
+    /*   background-color:red; */
+    float:left;
+}
+.info-one {
+    width:100%;
+    height:250px;
+    /*   background-color:green; */
+}
+.info-two {
+    width:100%;
+    height:250px;
+}
+.info-three {
+    width:100%;
+    height:300px;
+}
+.info-four {
+    width:100%;
+    height:300px;
+}
+/* 中部右边 main-right */
+.main-right {
+    width:70%;
+    height:1100px;
+    /*   background-color:blue; */
+    float:left;
+}
+.info-five {
+    width:100%;
+    height:250px;
+}
+.info-six {
+    width:100%;
+    height:570px;
+}
+info-seven {
+    width:100%;
+    height:200%;
+}
+.info-five span {
+    font-weight:700;
+    margin-right:60px;
+}
+.info-six span {
+    font-weight:700;
+    margin-right:60px;
+}
+.info-six-two-title {
+    margin-top:15px;
+    margin-bottom:15px;
+}
+/* 底部 footer */
+.footer {
+    clear:both;
+    height:10px;
+    width:100%;
+    background-color:#1a4b9b;
+}
