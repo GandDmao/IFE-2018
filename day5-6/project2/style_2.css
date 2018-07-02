@@ -1,0 +1,29 @@
+.all{
+    width:1000px;
+    height:2000px;
+    margin: 0 auto;
+}
+
+span{
+    font-weight: bold;
+}
+
+.header{
+    float:left;
+    background-color: rgb(63,142,249);
+    text-align: center;
+    width:300px;
+    height:850px;
+    color:rgb(255,255,255);
+}
+
+.content{
+    float: right;
+    width:700px;
+    height:1000px;
+    text-indent: 2em;
+}
+
+p{
+    margin: 0;
+}
