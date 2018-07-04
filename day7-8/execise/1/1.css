@@ -1,0 +1,16 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+.left, .right {
+    float: left;
+    height: 200px;
+}
+.left {
+    width: 30%;
+    background-color: red;
+}
+.right {
+    width: 70%;
+    background-color: yellow;
+}

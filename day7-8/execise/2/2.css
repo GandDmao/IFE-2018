@@ -1,0 +1,26 @@
+.page{
+    zoom:1;
+}
+
+.page:after{
+    content:" ";
+    display:block;
+    height:0;
+    clear: both;
+}
+
+.left,
+.right{
+    min-height: 300px;
+}
+
+.left{
+    float:left;
+    width:300px;
+    background-color: red;
+    margin-right: 10px;
+}
+.right{
+    overflow: hidden;
+    background-color: yellow;
+}

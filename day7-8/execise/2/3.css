@@ -1,0 +1,20 @@
+.page{
+    position: relative;
+}
+
+.left,
+.right{
+    min-height: 300px;
+}
+
+.left{
+    position:absolute;
+    top:0;
+    left:0;
+    width:300px;
+    background-color: red;
+}
+.right{
+    margin-left: 310px;
+    background-color: yellow;
+}

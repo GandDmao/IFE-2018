@@ -1,0 +1,24 @@
+.page{
+    position:relative;
+}
+
+.left,
+.right{
+    height:200px;
+}
+
+.left{
+    position: absolute;
+    top:0;
+    left:0;
+    width:30%;
+    background-color: red;
+}
+
+.right{
+    position: absolute;
+    top:0;
+    left:30%;
+    width:70%;
+    background-color: yellow;
+}

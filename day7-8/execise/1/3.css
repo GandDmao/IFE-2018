@@ -1,0 +1,18 @@
+.page{
+    display: flex;
+}
+
+.left,
+.right{
+    height:200px;
+}
+
+.left{
+    flex:0 0 30%;
+    background-color: red;
+}
+
+.right{
+    flex: 0 0 70%;
+    background-color: yellow;
+}

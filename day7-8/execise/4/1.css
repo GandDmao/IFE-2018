@@ -1,0 +1,19 @@
+.center{
+    margin: 0 300px;
+    height:300px;
+    background-color: yellow;
+}
+
+.left, .right{
+    width:300px;
+    height:300px;
+    background-color: red;
+}
+
+.left{
+    float:left;
+}
+
+.right{
+    float:right;
+}
