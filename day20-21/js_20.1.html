@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>No.1</title>
+</head>
+<body>
+<input id="name" type="text">
+<button id="submit-btn">Submit</button>
+
+<script>
+    var input=document.querySelector("#name");
+    var button=document.querySelector("#submit-btn");
+    
+    button.addEventListener("click",function () {
+        alert(input.value)
+    },false);
+
+    input.addEventListener("keydown",function (event) {
+        if(event.keyCode===13)    /*enter键的ASCII是13*/
+            alert(input.value);
+        else if(event.keyCode===27)   /*esc键的ASCII是27*/
+            input.value="";
+    },false)
+</script>
+</body>
+</html>

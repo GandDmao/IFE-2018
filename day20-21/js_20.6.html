@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>No.6</title>
+    <style>
+        .sprite{
+            background-image: url("erik_ce204002.jpg");
+            width:480px;
+            height:480px;
+        }
+    </style>
+</head>
+<body>
+<div class="sprite"></div>
+<script>
+    var div=document.querySelector(".sprite");
+    var px=0;
+
+    setInterval(function(){
+        var position="0 "+px+"px";
+        div.style.backgroundPosition = position;
+        if(px=== -8160){
+            px=0;
+        }
+        px-=480;
+    },50)
+</script>
+</body>
+</html>
