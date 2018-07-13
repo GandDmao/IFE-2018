@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>NO.6</title>
+</head>
+<body>
+<input id="queue-input" type="text">
+<p id="queue-cont">队列内容：apple-&gt;pear</p>
+<button id="in-btn">入队</button><br>
+<button id="out-btn">出队</button><br>
+<button id="font-btn">打印队头元素内容</button><br>
+<button id="empty-btn">判断队列是否为空</button><br>
+
+<script>
+    var queue = ["apple", "pear"];
+    var input = document.getElementById("queue-input");
+    var p = document.getElementById("queue-cont");
+    var task1 = document.getElementById("in-btn");
+    var task2 = document.getElementById("out-btn");
+    var task3 = document.getElementById("font-btn");
+    var task4 = document.getElementById("empty-btn");
+    //如果队头对应数组第一个元素，则入队时直接将inputpush进队列中即可
+    task1.addEventListener("click", function () {
+        if (input.value) {
+            queue.push(input.value);
+            p.innerHTML = "队列内容：" + queue.join("&lt;-");
+        }
+        else {
+            console.log("请输入内容");
+        }
+    }, false);
+    //出队时应该从数组的最开始出
+    //shift()用于把数组的第一个元素从其中删除，并返回第一个元素的值
+    task2.addEventListener("click", function () {
+        queue.shift();
+        p.innerHTML = "队列内容：" + queue.join("&lt;-");
+    }, false);
+    //队头则为数组第一个元素
+    task3.addEventListener("click", function () {
+        console.log(queue[0]);
+    }, false);
+
+    task4.addEventListener("click", function () {
+        if (queue.length) {
+            console.log("不为空");
+        }
+        else {
+            console.log("为空");
+        }
+    }, false);
+</script>
+</body>
+</html>
