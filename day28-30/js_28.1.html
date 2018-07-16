@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>NO.1</title>
+    <style>
+        ul{
+            width:180px;
+        }
+        li:hover{
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <input id="email-input" type="text">
+    <ul id="email-sug-wrapper" class="email-sug"></ul>
+</div>
+<script>
+    var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+
+    var input=document.querySelector("#email-input");
+    var email_list=document.querySelector("#email-sug-wrapper");
+    var li=[];
+    var activeli=[];
+    var choose;
+
+
+//只创建一个li节点,通过隐藏显示和变更li节点的内容来实现
+
+    //一次创建5个li
+    function makeli() {
+        email_list.style.padding = 0;
+        email_list.style.margin = 0;
+        for (var i=0;i<postfixList.length;i++){
+            li[i]=document.createElement('li');
+            email_list.appendChild(li[i]);
+            li[i].style.display="none";
+        }
+    }
+    makeli();
+
+    input.focus();
+
+    //查找状态非none的li
+    function findActiveli() {
+        var active=[];
+        for(var i=0;i<li.length;i++){
+            if(li[i].style.display!=="none"){
+                active.push(li[i]);
+            }
+        }
+        return active;
+    }
+
+    input.oninput=function (e) {
+        var str=trimOf(e.target.value);
+
+        if(str){
+            inputList(str);
+        }
+        else{
+            for(var i=0;i<li.length;i++){
+                li[i].style.display="none";
+            }
+        }
+        activeli=findActiveli();
+        choose=activeli[0];
+        resetcolor();
+    }
+
+    //蓝色选择提示内容
+    function resetcolor() {
+        if(activeli[0]){
+            activeli[0].style.backgroundColor="lightblue";
+            for(var i=1;i<activeli.length;i++){
+                activeli.style.backgroundColor="";
+            }
+        }
+    }
+
+    function showchooseitem() {
+        if(choose){
+            choose.style.backgroundColor="lightblue";
+        }
+    }
+
+    function clearcolor() {
+        choose.style.backgroundColor="";
+    }
+
+    
+    var UP=38,DOWN=40,ENTER=13,ESC=27;
+    
+    input.onkeydown=function (e) {
+        if(e.keyCode===UP){
+            clearcolor();
+            if(choose===activeli[0]){
+                choose=activeli[activeli.length-1];
+            }
+            else{
+                for(var i=1;i<activeli.length;i++){
+                    if(choose===activeli[i]){
+                        choose=activeli[i-1];
+                    }
+                }
+            }
+            showchooseitem();
+        }
+        else if(e.keyCode===DOWN){
+            clearcolor();
+            if(choose===activeli[activeli.length-1]){
+                choose=activeli[0];
+            }
+            else{
+                for(var i=0;i<activeli.length;i++){
+                    if(choose===activeli[i]){
+                        choose=activeli[i+1];
+                        break;
+                    }
+                }
+            }
+            showchooseitem();
+        }
+        else if(e.keyCode===ENTER){
+            input.value=choose.textContent;
+            choose=activeli[0];
+            for(var i=0;i<li.length;i++){
+                li[i].style.display="none";
+            }
+
+        }
+        else if(e.keyCode===ESC){
+            input.select();
+        }
+    }
+
+
+    //字符串去除前后空白功能
+    function trimOf(str) {
+        return str.trim();
+    }
+
+    function inputList(str) {
+        var arr=splitAt(str);
+
+        if(arr[1]===""){
+            for(var i=0;i<postfixList.length;i++){
+                li[i].style.display="block";
+                li[i].textContent=arr[0]+"@"+postfixList[i];
+            }
+        }
+        else{
+            var flag=0;
+            for(var i=0;i<postfixList.length;i++){
+                if(arr[1]===postfixList[i].slice(0,arr[1].lenght)){
+                    li[i].style.display="block";
+                    li[i].textContent=arr[0]+"@"+postfixList[i];
+                    flag=1;
+                }
+                else{
+                    li[i].style.display="none";
+                }
+            }
+            if(flag===0){
+                for(var i=0;i<postfixList.length;i++){
+                    li[i].style.display="block";
+                    li[i].textContent=arr[0]+"@"+postfixList[i];
+                }
+            }
+        }
+    }
+
+    //获取@前后的字符串
+    function splitAt(str) {
+        var j=["",""];
+        var flag=1;
+        for(var i=0;i<str.length;i++){
+            if(flag){
+                if(str[i]=="@"){
+                    j[0]=trimOf(j[0]);
+                    flag=0;
+                }
+                else{
+                    j[0]=j[0]+str[i];
+                }
+            }
+            else{
+                j[1]=j[1]+str[i];
+            }
+        }
+        return j;
+    }
+
+    //监听鼠标点击提示屏对应li，相应li的内容上屏到输入区
+    email_list.addEventListener("click",function (e) {
+        input.value=e.target.textContent;
+        for(var i=0;i<li.length;i++){
+            li[i].style.display="none";
+        }
+        input.focus();
+    },false)
+
+</script>
+</body>
+</html>
