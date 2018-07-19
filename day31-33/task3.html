@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>再复杂一些</title>
+    <style>
+        table{
+            border-collapse:collapse;
+            width: 100%;
+            margin-bottom: 10px;
+            background-color: white;
+            text-align: center;
+        }
+        td,th {
+            padding: 0.6em;
+            border-top: 1px solid #dee2e6
+        }
+        thead th {
+            border-bottom: 2px solid #dee2e6
+        }
+        tbody tr:nth-of-type(2n) {
+            background-color: rgba(0,0,200,0.05);
+        }
+        tbody tr:hover {
+            background-color: rgba(0,0,200,0.15);
+        }
+    </style>
+</head>
+<body>
+<div id="product-select">
+    <span>商品:</span>
+    <label><input type="checkbox" name="productall" id="productall" checked>全选</label>
+    <label><input type="checkbox" name="product1" id="product1" value="手机" checked>手机</label>
+    <label><input type="checkbox" name="product2" id="product2" value="笔记本" checked>笔记本</label>
+    <label><input type="checkbox" name="product3" id="product3" value="智能音箱" checked>智能音箱</label>
+</div>
+<div id="region-select">
+    <span>地区:</span>
+    <label><input type="checkbox" name="regionall" id="regionall" checked>全选</label>
+    <label><input type="checkbox" name="region1" id="region1" value="华东" checked>华东</label>
+    <label><input type="checkbox" name="region2" id="region2" value="华南" checked>华南</label>
+    <label><input type="checkbox" name="region3" id="region3" value="华北" checked>华北</label>
+</div>
+<div id="table-wrapper">
+</div>
+<script>
+    let sourceData = [{
+        product: "手机",
+        region: "华东",
+        sale: [120, 100, 140, 160, 180, 185, 190, 210, 230, 245, 255, 270]
+    }, {
+        product: "手机",
+        region: "华北",
+        sale: [80, 70, 90, 110, 130, 145, 150, 160, 170, 185, 190, 200]
+    }, {
+        product: "手机",
+        region: "华南",
+        sale: [220, 200, 240, 250, 260, 270, 280, 295, 310, 335, 355, 380]
+    }, {
+        product: "笔记本",
+        region: "华东",
+        sale: [50, 60, 80, 110, 30, 20, 70, 30, 420, 30, 20, 20]
+    }, {
+        product: "笔记本",
+        region: "华北",
+        sale: [30, 35, 50, 70, 20, 15, 30, 50, 710, 130, 20, 20]
+    }, {
+        product: "笔记本",
+        region: "华南",
+        sale: [80, 120, 130, 140, 70, 75, 120, 90, 550, 120, 110, 100]
+    }, {
+        product: "智能音箱",
+        region: "华东",
+        sale: [10, 30, 4, 5, 6, 5, 4, 5, 6, 5, 5, 25]
+    }, {
+        product: "智能音箱",
+        region: "华北",
+        sale: [15, 50, 15, 15, 12, 11, 11, 12, 12, 14, 12, 40]
+    }, {
+        product: "智能音箱",
+        region: "华南",
+        sale: [10, 40, 10, 6, 5, 6, 8, 6, 6, 6, 7, 26]
+    }]
+    var regionSelect = document.querySelector('#region-select');
+    var productSelect = document.querySelector('#product-select');
+    var tableWarpper = document.querySelector('#table-wrapper');
+    var product1 = document.querySelector('#product1');
+    var product2 = document.querySelector('#product2');
+    var product3 = document.querySelector('#product3');
+    var productall = document.querySelector('#productall');
+    var region1 = document.querySelector('#region1');
+    var region2 = document.querySelector('#region2');
+    var region3 = document.querySelector('#region3');
+    var regionall = document.querySelector('#regionall');
+    regionSelect.addEventListener("change",function(e){
+        drawTable(getValue())
+    },false)
+    productSelect.addEventListener("change",function(e){
+        drawTable(getValue())
+    },false)
+    productSelect.addEventListener("click",function(e){
+        if(e.target.name==="productall"&&e.target.checked===true){
+            product1.checked=true;
+            product2.checked=true;
+            product3.checked=true;
+        }else if(e.target.name==="productall"&&e.target.checked===false){
+            product1.checked=true;
+            product2.checked=false;
+            product3.checked=false;
+        } else if(e.target.type==="checkbox"&&product1.checked===false&&product2.checked===false&&product3.checked===false){
+            e.target.checked=true;
+        } else if(e.target.type==="checkbox"&&e.target.checked===false){
+            productall.checked=false;
+        } else if((e.target.type==="checkbox"&&product1.checked===true&&product2.checked===true&&product3.checked===true)){
+            productall.checked=true;
+        }
+    },false)
+    regionSelect.addEventListener("click",function(e){
+        if(e.target.name==="regionall"&&e.target.checked===true){
+            region1.checked=true;
+            region2.checked=true;
+            region3.checked=true;
+        }else if(e.target.name==="regionall"&&e.target.checked===false){
+            region1.checked=true;
+            region2.checked=false;
+            region3.checked=false;
+        } else if(e.target.type==="checkbox"&&region1.checked===false&&region2.checked===false&&region3.checked===false){
+            e.target.checked=true;
+        } else if(e.target.type==="checkbox"&&e.target.checked===false){
+            regionall.checked=false;
+        } else if((e.target.type==="checkbox"&&region1.checked===true&&region2.checked===true&&region3.checked===true)){
+            regionall.checked=true;
+        }
+    },false)
+    drawTable(getValue());
+    function getValue(){
+        var values = {};
+        values.product=[];
+        values.region=[];
+        var checkboxes1 = document.querySelectorAll('#product-select input');
+        var checkboxes2 = document.querySelectorAll('#region-select input');
+        for (i=1; i<checkboxes1.length; i++) {
+            if (checkboxes1[i].checked) {
+                values.product.push(checkboxes1[i].value);
+            }
+        }
+        for (i=1; i<checkboxes2.length; i++) {
+            if (checkboxes2[i].checked) {
+                values.region.push(checkboxes2[i].value) ;
+            }
+        } console.log(values);
+        return values;
+    }
+    function drawTable(data) {
+        var thead = "<thead><tr><th>商品</th><th>地区</th><th>1月</th><th>2月</th><th>3月</th><th>4月</th><th>5月</th><th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>12月</th></tr></thead>";
+        var tbody = "<tbody>";
+        for(var i in sourceData) {
+            for(var j=0; j<data.product.length; j++){
+                for(var k=0; k<data.region.length; k++){
+                    if(sourceData[i].product===data.product[j]&&sourceData[i].region===data.region[k]){
+                        tbody += "<tr><td>"+sourceData[i].product+"</td><td>"+sourceData[i].region+"</td>";
+                        for(j=0;j<12;j++){
+                            tbody += "<td>" + sourceData[i].sale[j]+"</td>";
+                        }
+                    }
+                }
+            }
+        }
+        tbody += "</tr></tbody>";
+        tableWarpper.innerHTML = "<table>" + thead + tbody + "</table>";
+    }
+
+</script>
+</body>
+</html>

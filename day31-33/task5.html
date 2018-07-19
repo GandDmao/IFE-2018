@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>合并拆分</title>
+    <style>
+        table{
+            border-collapse:collapse;
+            width: 100%;
+            margin-bottom: 10px;
+            background-color: white;
+            text-align: center;
+        }
+        td,th {
+            padding: 0.6em;
+            border-top: 1px solid #dee2e6
+        }
+        thead th {
+            border-bottom: 2px solid #dee2e6
+        }
+        tbody tr:nth-of-type(2n) {
+            background-color: rgba(0,0,200,0.05);
+        }
+        tbody tr:hover {
+            background-color: rgba(0,0,200,0.15);
+        }
+    </style>
+</head>
+<body>
+<div id="product-select">
+    <span>商品:</span>
+    <label><input type="checkbox" name="productall" id="productall" checked>全选</label>
+    <label><input type="checkbox" name="product1" id="product1" value="手机" checked>手机</label>
+    <label><input type="checkbox" name="product2" id="product2" value="笔记本" checked>笔记本</label>
+    <label><input type="checkbox" name="product3" id="product3" value="智能音箱" checked>智能音箱</label>
+</div>
+<div id="region-select">
+    <span>地区:</span>
+    <label><input type="checkbox" name="regionall" id="regionall" checked>全选</label>
+    <label><input type="checkbox" name="region1" id="region1" value="华东" checked>华东</label>
+    <label><input type="checkbox" name="region2" id="region2" value="华南" checked>华南</label>
+    <label><input type="checkbox" name="region3" id="region3" value="华北" checked>华北</label>
+</div>
+<div id="table-wrapper">
+</div>
+<script src="js/ife31data.js"></script>
+<script src="js/table.js"></script>
+<script src="js/checkbox.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

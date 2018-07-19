@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>task2:稍微复杂一些</title>
+    <style>
+        table{
+            border-collapse: collapse;
+            width:100%;
+            margin-bottom: 10px;
+            background-color: white;
+            text-align: center;
+        }
+
+        td,th{
+            padding:0.6em;
+            border-top: 1px solid #dee2e6;
+        }
+
+        thead th{
+            border-bottom:2px solid #dee2e6;
+        }
+
+        tbody tr:nth-of-type(2n){
+            background-color: rgba(0,0,200,0.5);
+        }
+
+        tbody tr:hover{
+            background-color: rgba(0,0,200,0.07);
+        }
+    </style>
+</head>
+<body>
+<div id="product-select">
+    <span>商品：</span>
+    <label><input type="radio" name="product" checked value="手机">手机</label>;
+    <label><input type="radio" name="product" checked value="笔记本">笔记本</label>;
+    <label><input type="radio" name="product" checked value="智能音箱">智能音箱</label>;
+</div>
+<div id="region-select">
+    <span>地区：</span>
+    <label><input type="radio" name="region" checked value="华东">华东</label>;
+    <label><input type="radio" name="region" checked value="华南">华南</label>;
+    <label><input type="radio" name="region" checked value="华北">华北</label>;
+</div>
+<div id="table-wrapper">
+
+</div>
+<script>
+    let sourceData = [{
+        product: "手机",
+        region: "华东",
+        sale: [120, 100, 140, 160, 180, 185, 190, 210, 230, 245, 255, 270]
+    }, {
+        product: "手机",
+        region: "华北",
+        sale: [80, 70, 90, 110, 130, 145, 150, 160, 170, 185, 190, 200]
+    }, {
+        product: "手机",
+        region: "华南",
+        sale: [220, 200, 240, 250, 260, 270, 280, 295, 310, 335, 355, 380]
+    }, {
+        product: "笔记本",
+        region: "华东",
+        sale: [50, 60, 80, 110, 30, 20, 70, 30, 420, 30, 20, 20]
+    }, {
+        product: "笔记本",
+        region: "华北",
+        sale: [30, 35, 50, 70, 20, 15, 30, 50, 710, 130, 20, 20]
+    }, {
+        product: "笔记本",
+        region: "华南",
+        sale: [80, 120, 130, 140, 70, 75, 120, 90, 550, 120, 110, 100]
+    }, {
+        product: "智能音箱",
+        region: "华东",
+        sale: [10, 30, 4, 5, 6, 5, 4, 5, 6, 5, 5, 25]
+    }, {
+        product: "智能音箱",
+        region: "华北",
+        sale: [15, 50, 15, 15, 12, 11, 11, 12, 12, 14, 12, 40]
+    }, {
+        product: "智能音箱",
+        region: "华南",
+        sale: [10, 40, 10, 6, 5, 6, 8, 6, 6, 6, 7, 26]
+    }];
+
+    var regionSelect=document.querySelector('#region-select');
+    var productSelect=document.querySelector('#product-select');
+    var tableWrapper=document.querySelector('#table-wrapper');
+
+    regionSelect.addEventListener("change",function (e) {
+        drawTable(getValue())
+    },false);
+
+    productSelect.addEventListener("change",function (e) {
+        drawTable(getValue())
+    },false);
+
+    drawTable(getValue());
+
+    //根据select选项获取数据
+    function getValue() {
+        var radio1=document.getElementsByName("product");
+        var radio2=document.getElementsByName("region");
+        var values=[];
+        for(i=0;i<radio1.length;i++){
+            if(radio1[i].checked){
+                values.push(radio1[i].value);
+            }
+        }
+        for(i=0;i<radio2.length;i++){
+            if(radio2[i].checked){
+                values.push(radio2[i].value);
+            }
+        }
+        return values;
+    }
+
+    //绘制表格
+    function drawTable(data) {
+        var thread="<thread><tr><th>商品</th><th>地区</th><th>1月</th><th>2月</th><th>3月</th><th>4月</th><th>5月</th><th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>12月</th></tr>";
+        var tbody="<tbody>";
+        //遍历数据
+        for(var i in sourceData){
+            if(sourceData[i].region===data[1]&&sourceData[i].product===data[0]){
+                tbody+="<tr><td>"+sourceData[i].product+"</td><td>"+sourceData[i].region+"</td>";
+                for(j=0;j<12;j++){
+                    tbody+="<td>"+sourceData[i].sale[j]+"</td>";
+                }
+            }
+        }
+        tbody+="</tr></tbody>";
+        tableWrapper.innerHTML="<table>"+thread+tbody+"</table>";
+    }
+</script>
+</body>
+</html>
